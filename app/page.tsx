@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { ArrowRight, Check, Clock3, Phone } from 'lucide-react'
+import { BannerSlideshow } from '@/components/banner-slideshow'
 import { Footer, Navbar, SectionHeading, TrustStrip } from '@/components/site'
 import { SearchWidget } from '@/components/search'
 
@@ -16,12 +17,14 @@ export const metadata: Metadata = {
   },
 }
 
-const services = [
-  'Tour Package Domestik & Mancanegara',
-  'Study Tour / KKL / MICE',
+const layanan = [
+  'Tour Package Domestik dan Mancanegara',
+  'Study Tour, Study Banding, Kunjungan Kerja, KKL, MICE, EO, atau WO',
+  'Wisata Nusantara dan Mancanegara',
   'Persewaan Transportasi Wisata',
+  'Transport Organizer',
   'Tiket Pesawat / Kereta Api',
-  'Agen Resmi Ancol',
+  'Agen Resmi PT. Taman Impian Jaya Ancol',
 ]
 
 const packages = [
@@ -52,7 +55,8 @@ const packages = [
 export default function Home() {
   return (
     <main>
-      <section id="beranda" className="hero-image min-h-[650px] text-white">
+      <section id="beranda" className="relative min-h-[650px] text-white">
+        <BannerSlideshow />
         <Navbar />
         <div className="container-wide flex min-h-[650px] items-center pb-12 pt-28">
           <div className="max-w-2xl">
@@ -121,27 +125,47 @@ export default function Home() {
       </section>
 
       <section id="tentang" className="bg-[#edf5ef] py-20">
-        <div className="container-wide grid gap-12 md:grid-cols-2 md:items-center">
+        <div className="container-wide grid gap-10 lg:grid-cols-2 lg:items-start">
           <div>
-            <p className="eyebrow">Layanan kami</p>
-            <h2 className="mt-2 text-3xl font-bold text-[#1b3555] md:text-4xl">
-              Semua kebutuhan perjalanan, dalam satu tempat.
-            </h2>
+            <p className="eyebrow mb-2">Tentang Kami</p>
+            <h2 className="text-3xl font-bold text-[#1b3555] md:text-4xl">Barokah Tour & Travel</h2>
+            <p className="mt-4 leading-relaxed text-[#657080]">
+              Barokah Tour & Travel adalah jasa pariwisata yang berada di bawah naungan PT. Bina Barokah Sejahtera dengan lisensi:
+            </p>
             <p className="mt-4 leading-relaxed text-[#657080]">
               Kami membantu perjalanan wisata, pendidikan, dan perusahaan dengan pelayanan yang amanah dan profesional.
             </p>
           </div>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {services.map((s, i) => (
-              <div key={s} className="flex items-start gap-3 border-b border-[#cbded0] py-3">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#2ca84a] text-xs font-bold text-white">
-                  {i + 1}
-                </span>
-                <p className="text-sm font-semibold text-[#1b3555]">{s}</p>
-              </div>
-            ))}
+          <div className="rounded-md border border-[#dfe4e8] bg-white p-6 shadow-sm">
+            <h3 className="text-lg font-bold text-[#1b3555]">Lisensi & Data Resmi</h3>
+            <ul className="mt-4 space-y-3 text-sm">
+              <li className="flex items-start gap-2"><Check size={15} className="mt-0.5 shrink-0 text-[#2ca84a]" /><span><strong>Penanggung jawab:</strong> Rizal Bahtiar, S.Psi.</span></li>
+              <li className="flex items-start gap-2"><Check size={15} className="mt-0.5 shrink-0 text-[#2ca84a]" /><span><strong>Akta Notaris:</strong> AHU-0045694.AH.01.012018</span></li>
+              <li className="flex items-start gap-2"><Check size={15} className="mt-0.5 shrink-0 text-[#2ca84a]" /><span><strong>SIUP, TDUP, NIB:</strong> 8120004912783</span></li>
+              <li className="flex items-start gap-2"><Check size={15} className="mt-0.5 shrink-0 text-[#2ca84a]" /><span><strong>ASITA:</strong> 0704/IX/DPP/2018</span></li>
+              <li className="flex items-start gap-2"><Check size={15} className="mt-0.5 shrink-0 text-[#2ca84a]" /><span><strong>Alamat:</strong> Graha Barokah Jl. Cisaat Sukamanah, Kec. Cisaat, Kab. Sukabumi (43152)</span></li>
+              <li className="flex items-start gap-2"><Check size={15} className="mt-0.5 shrink-0 text-[#2ca84a]" /><span><strong>No. Telepon:</strong> (0266) 230-408 / 0859 3000 5544</span></li>
+              <li className="flex items-start gap-2"><Check size={15} className="mt-0.5 shrink-0 text-[#2ca84a]" /><span><strong>E-mail:</strong> adminbarokahtour@gmail.com</span></li>
+              <li className="flex items-start gap-2"><Check size={15} className="mt-0.5 shrink-0 text-[#2ca84a]" /><span><strong>Website:</strong> www.barokahtour.com</span></li>
+            </ul>
           </div>
         </div>
+      </section>
+
+      <section id="layanan" className="container-wide py-20">
+        <SectionHeading
+          label="Yang kami tawarkan"
+          title="Layanan Kami"
+          text="Barokah Tour & Travel adalah perusahaan jasa pariwisata yang berada di bawah naungan PT. Bina Barokah Sejahtera dengan lisensi:"
+        />
+        <ul className="grid gap-3 sm:grid-cols-2">
+          {layanan.map((item) => (
+            <li key={item} className="flex items-start gap-3 rounded-md border border-[#dfe4e8] bg-white p-4 shadow-sm">
+              <Check size={18} className="mt-0.5 shrink-0 text-[#2ca84a]" />
+              <p className="text-sm font-semibold text-[#1b3555]">{item}</p>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="bg-[#f5b915] py-12">

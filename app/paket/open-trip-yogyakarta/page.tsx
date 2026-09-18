@@ -43,7 +43,7 @@ const rules = [
 
 export default function Detail() {
   return (
-    <main className="pb-28">
+    <main>
       <header className="border-b bg-white">
         <div className="container-wide flex h-[76px] items-center justify-between">
           <Logo />
@@ -128,7 +128,7 @@ export default function Detail() {
         </div>
 
         <aside className="hidden md:block">
-          <div className="sticky top-8 border border-[#dfe4e8] bg-white p-6 shadow-sm">
+          <div className="mt-[82px] border border-[#dfe4e8] bg-white p-6 shadow-sm">
             <p className="text-sm text-[#657080]">Harga per peserta</p>
             <p className="mt-1 text-3xl font-bold text-[#1b4f9c]">Rp 1.450.000</p>
             <p className="mt-2 text-xs text-[#657080]">Sudah termasuk fasilitas perjalanan di atas.</p>

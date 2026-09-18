@@ -76,12 +76,9 @@ export default function Guide() {
   return (
     <main className="min-h-screen bg-[#f4f7fa] pb-12">
       <header className="border-b bg-white">
-        <div className="mx-auto flex max-w-2xl items-center justify-between px-4 py-4">
-          <div className="flex items-center gap-3">
-            <BackLink />
-            <Logo />
-          </div>
-          <span className="text-xs font-bold uppercase tracking-wider text-[#657080]">Buku Panduan Peserta</span>
+        <div className="container-wide flex h-[76px] items-center justify-between">
+          <Logo />
+          <BackLink />
         </div>
       </header>
 
