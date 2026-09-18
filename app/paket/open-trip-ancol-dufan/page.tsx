@@ -73,26 +73,20 @@ export default function Detail() {
           <section>
             <p className="eyebrow">Rangkaian perjalanan</p>
             <h2 className="mt-2 text-3xl font-bold text-[#1b3555]">Itinerary</h2>
-            <div className="mt-5 overflow-x-auto rounded-lg border border-[#dfe4e8] bg-white">
-              <table className="w-full min-w-[560px] text-left text-sm">
-                <thead className="bg-[#edf5ef] text-[#1b3555]">
-                  <tr>
-                    <th className="p-4">Waktu</th>
-                    <th className="p-4">Agenda</th>
-                    <th className="p-4">Keterangan</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {itinerary.map((row) => (
-                    <tr key={row[0]} className="border-t">
-                      <td className="p-4 font-bold text-[#1b4f9c]">{row[0]}</td>
-                      <td className="p-4 font-semibold">{row[1]}</td>
-                      <td className="p-4 text-[#657080]">{row[2]}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <ol className="relative mt-5 border-l-2 border-[#2ca84a] pl-5">
+              {itinerary.map((row, i) => (
+                <li key={row[0]} className="relative pb-6 pl-1 last:pb-0">
+                  <span className="absolute -left-[27px] top-1 h-3 w-3 rounded-full bg-[#2ca84a]" aria-hidden />
+                  <div className="flex gap-4">
+                    <strong className="w-14 shrink-0 text-sm font-bold text-[#1b4f9c]">{row[0]}</strong>
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold text-[#1b3555]">{row[1]}</p>
+                      <p className="mt-0.5 text-sm text-[#657080]">{row[2]}</p>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </section>
 
           <section>
@@ -135,7 +129,7 @@ export default function Detail() {
         </aside>
       </div>
 
-      <BookingBar />
+      <BookingBar price="Rp 425.000" />
       <Footer />
     </main>
   )
