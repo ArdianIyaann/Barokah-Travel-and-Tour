@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import { Plane, Ticket } from 'lucide-react'
 import { SearchWidget } from './search'
 import { TicketSearch } from './ticket-search'
@@ -9,6 +9,26 @@ type PackageOption = { title: string; href: string; keywords: string[] }
 
 export function SearchTabs({ packages }: { packages: PackageOption[] }) {
   const [tab, setTab] = useState<'paket' | 'nama'>('nama')
+  const containerRef = useRef<HTMLDivElement>(null)
+  const paketRef = useRef<HTMLDivElement>(null)
+  const namaRef = useRef<HTMLDivElement>(null)
+  const [height, setHeight] = useState(0)
+
+  useLayoutEffect(() => {
+    const measure = () => {
+      const paket = paketRef.current?.offsetHeight ?? 0
+      const nama = namaRef.current?.offsetHeight ?? 0
+      setHeight(Math.max(paket, nama))
+    }
+
+    measure()
+
+    const ro = new ResizeObserver(measure)
+    if (paketRef.current) ro.observe(paketRef.current)
+    if (namaRef.current) ro.observe(namaRef.current)
+
+    return () => ro.disconnect()
+  }, [])
 
   return (
     <div>
@@ -30,12 +50,32 @@ export function SearchTabs({ packages }: { packages: PackageOption[] }) {
           <Plane size={15} /> Cari Paket
         </button>
       </div>
-      <div key={tab} className="animate-fade-up">
-        {tab === 'paket' ? (
-          <SearchWidget packages={packages} />
-        ) : (
-          <TicketSearch />
-        )}
+
+      <div
+        ref={containerRef}
+        style={{ height }}
+        className="relative"
+      >
+        <div
+          ref={namaRef}
+          inert={tab !== 'nama'}
+          aria-hidden={tab !== 'nama'}
+          className={`absolute inset-x-0 top-0 transition-opacity duration-300 ease-out ${tab === 'nama' ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
+        >
+          <div className="w-full pt-3">
+            <TicketSearch />
+          </div>
+        </div>
+        <div
+          ref={paketRef}
+          inert={tab !== 'paket'}
+          aria-hidden={tab !== 'paket'}
+          className={`absolute inset-x-0 top-0 transition-opacity duration-300 ease-out ${tab === 'paket' ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
+        >
+          <div className="w-full pt-3">
+            <SearchWidget packages={packages} />
+          </div>
+        </div>
       </div>
     </div>
   )

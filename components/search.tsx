@@ -193,75 +193,68 @@ export function SearchWidget({ packages }: { packages: PackageOption[] }) {
   }
 
   return (
-    <form className="mt-8" onSubmit={handleSubmit} aria-label="Cari paket wisata">
-      <div className="grid grid-cols-1 gap-2 rounded-2xl border border-[#dfe4e8] bg-white p-2 shadow-lg transition-[border-radius] duration-[700ms] ease-[cubic-bezier(0.22,1,0.36,1)] lg:rounded-full portrait:rounded-2xl! lg:grid-cols-[1.2fr_1fr_1fr_auto] lg:gap-1.5 lg:p-1.5">
-        <label className="flex items-center gap-2 rounded-xl bg-[#f8fafc] px-4 py-1.5 transition-[border-radius,border-color,box-shadow,background-color] duration-[700ms] ease-[cubic-bezier(0.22,1,0.36,1)] has-[:focus]:bg-white has-[:focus]:ring-2 has-[:focus]:ring-[#1b4f9c]/15 lg:rounded-full portrait:rounded-xl!">
+    <form onSubmit={handleSubmit} aria-label="Cari paket wisata">
+      <div className="flex flex-col gap-1.5 rounded-2xl border border-[#dfe4e8] bg-white p-1.5 shadow-xl min-[480px]:flex-row min-[480px]:items-stretch min-[480px]:rounded-full">
+        <label className="flex min-w-0 flex-1 items-center gap-2 rounded-2xl bg-[#f8fafc] px-4 py-2 min-[480px]:rounded-full has-[:focus]:bg-white">
           <MapPin className="shrink-0 text-[#2ca84a]" size={16} />
-          <span className="w-full">
-            <small className="block text-[10px] text-[#657080]">TUJUAN</small>
-            <input
-              className="w-full bg-transparent text-[13px] outline-none placeholder:text-[#9aa3af]"
-              placeholder="Mau ke mana?"
-              value={destination}
-              onChange={(e) => {
-                setDestination(e.target.value)
-                if (message) setMessage(null)
-              }}
-              aria-label="Tujuan perjalanan"
-            />
-          </span>
+          <input
+            className="w-full min-w-0 bg-transparent text-[13px] outline-none placeholder:text-[#9aa3af]"
+            placeholder="Mau ke mana?"
+            value={destination}
+            onChange={(e) => {
+              setDestination(e.target.value)
+              if (message) setMessage(null)
+            }}
+            aria-label="Tujuan perjalanan"
+          />
         </label>
 
-        <label className="relative flex items-center gap-2 rounded-xl bg-[#f8fafc] px-4 py-1.5 transition-[border-radius,background-color] duration-[700ms] ease-[cubic-bezier(0.22,1,0.36,1)] has-[:focus]:bg-white lg:rounded-full portrait:rounded-xl!">
+        <label className="relative flex min-w-0 flex-1 items-center gap-2 rounded-2xl bg-[#f8fafc] px-4 py-2 min-[480px]:rounded-full has-[:focus]:bg-white">
           <CalendarDays className="shrink-0 text-[#2ca84a]" size={16} />
           <span className="w-full">
-            <small className="block text-[10px] text-[#657080]">TANGGAL</small>
             <CalendarDropdown value={tanggal} onChange={setTanggal} min={minDate} />
           </span>
         </label>
 
-        <label className="flex items-center gap-2 rounded-xl bg-[#f8fafc] px-4 py-1.5 transition-[border-radius,background-color] duration-[700ms] ease-[cubic-bezier(0.22,1,0.36,1)] lg:rounded-full portrait:rounded-xl!">
+        <label className="flex min-w-0 flex-1 items-center gap-2 rounded-2xl bg-[#f8fafc] px-4 py-2 min-[480px]:rounded-full">
           <Users className="shrink-0 text-[#2ca84a]" size={16} />
-          <span className="w-full">
-            <small className="block text-[10px] text-[#657080]">PESERTA</small>
-            <div className="mt-0.5 flex items-center justify-between gap-1.5 rounded-xl bg-white p-0.5 transition-[border-radius] duration-[700ms] ease-[cubic-bezier(0.22,1,0.36,1)] lg:rounded-full portrait:rounded-xl!">
-              <button
-                type="button"
-                onClick={() => setPesertaText(String(Math.max(1, peserta - 1)))}
-                aria-label="Kurangi jumlah peserta"
-                className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#f1f3f5] text-[#1b4f9c] transition hover:bg-[#e6edf5] active:scale-95"
-              >
-                <Minus size={12} />
-              </button>
-              <input
-                type="number"
-                min={1}
-                value={pesertaText}
-                onChange={(e) => setPesertaText(e.target.value)}
-                onBlur={commitPeserta}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    e.preventDefault()
-                    commitPeserta()
-                  }
-                }}
-                aria-label="Jumlah peserta"
-                className="w-10 rounded-md bg-transparent text-center text-sm font-bold text-[#1b3555] outline-none"
-              />
-              <button
-                type="button"
-                onClick={() => setPesertaText(String(peserta + 1))}
-                aria-label="Tambah jumlah peserta"
-                className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-white text-[#1b4f9c] shadow-sm transition hover:bg-[#e6edf5] active:scale-95"
-              >
-                <Plus size={12} />
-              </button>
-            </div>
+          <span className="flex w-full items-center justify-between gap-1">
+            <button
+              type="button"
+              onClick={() => setPesertaText(String(Math.max(1, peserta - 1)))}
+              aria-label="Kurangi jumlah peserta"
+              className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#f1f3f5] text-[#1b4f9c] transition hover:bg-[#e6edf5] active:scale-95"
+            >
+              <Minus size={12} />
+            </button>
+            <input
+              type="number"
+              min={1}
+              value={pesertaText}
+              onChange={(e) => setPesertaText(e.target.value)}
+              onBlur={commitPeserta}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault()
+                  commitPeserta()
+                }
+              }}
+              aria-label="Jumlah peserta"
+              className="w-8 rounded-md bg-transparent text-center text-sm font-bold text-[#1b3555] outline-none"
+            />
+            <button
+              type="button"
+              onClick={() => setPesertaText(String(peserta + 1))}
+              aria-label="Tambah jumlah peserta"
+              className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#f1f3f5] text-[#1b4f9c] transition hover:bg-[#e6edf5] active:scale-95"
+            >
+              <Plus size={12} />
+            </button>
           </span>
         </label>
         <button
           type="submit"
-          className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#f5b915] px-5 py-3 text-sm font-bold text-[#1d2733] transition-[border-radius,background-color] duration-[700ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-[#e4aa09] active:scale-95 lg:w-auto lg:rounded-full lg:py-2.5 portrait:rounded-xl!"
+          className="flex items-center justify-center gap-2 rounded-2xl bg-[#f5b915] px-5 py-2.5 text-sm font-bold text-[#1d2733] transition-colors duration-200 hover:bg-[#e4aa09] active:scale-95 min-[480px]:rounded-full"
         >
           <Search size={15} /> Cari Paket
         </button>
