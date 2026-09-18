@@ -33,6 +33,8 @@ const packages = [
     duration: '1 Hari',
     price: 'Rp 425.000',
     badge: 'Paling diminati',
+    location: 'Jakarta',
+    rating: '4.9',
     image:
       'https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=900&q=80',
     keywords: ['ancol', 'dufan', 'jakarta'],
@@ -44,6 +46,8 @@ const packages = [
     duration: '3D2N',
     price: 'Rp 1.450.000',
     badge: 'Pilihan keluarga',
+    location: 'DI Yogyakarta',
+    rating: '4.8',
     image:
       'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=900&q=80',
     keywords: ['yogyakarta', 'jogja', 'borobudur', 'malioboro'],
@@ -76,12 +80,14 @@ export default function Home() {
       <TrustStrip />
 
       <section id="paket" className="container-wide py-20">
-        <SectionHeading
-          label="Pilihan perjalanan"
-          title="Paket Populer"
-          text="Temukan perjalanan yang sudah kami siapkan untuk menemani waktu terbaik Anda."
-        />
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="mb-10 max-w-2xl">
+          <p className="eyebrow mb-2">Pilihan perjalanan</p>
+          <h2 className="text-3xl font-bold text-[#1b3555] md:text-4xl">Paket Populer</h2>
+          <p className="mt-3 leading-relaxed text-[#657080]">
+            Temukan perjalanan yang sudah kami siapkan untuk menemani waktu terbaik Anda.
+          </p>
+        </div>
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
           {packages.map((item) => (
             <PackageCard key={item.title} item={item} />
           ))}
